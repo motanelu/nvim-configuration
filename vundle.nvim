@@ -1,0 +1,72 @@
+" Vundle plugins
+
+" Utility
+Plugin 'Shougo/vimproc'
+Plugin 'Shougo/denite.nvim'
+Plugin 'Shougo/deoplete.nvim'
+
+" File navigation
+Plugin 'scrooloose/nerdtree'
+Plugin 'tyok/ack.vim'
+Plugin 'tyok/nerdtree-ack'
+Plugin 'xuyuanp/nerdtree-git-plugin'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'tacahiroy/ctrlp-funky'
+
+" PHP
+Plugin 'stephpy/vim-phpdoc'
+Plugin 'stephpy/vim-php-cs-fixer'
+Plugin 'shawncplus/phpcomplete.vim'
+Plugin 'arnaud-lb/vim-php-namespace'
+Plugin 'mkusher/padawan.vim'
+
+" Snippets
+Plugin 'SirVer/ultisnips'
+Plugin 'honza/vim-snippets'
+Plugin 'motanelu/php-snippets'
+
+" Client-side Javascript, CSS, templates
+Plugin 'ternjs/tern_for_vim'
+Plugin 'carlitux/deoplete-ternjs'
+Plugin 'othree/yajs.vim'
+Plugin 'othree/jspc.vim'
+Plugin 'othree/javascript-libraries-syntax.vim'
+Plugin 'othree/es.next.syntax.vim'
+Plugin 'othree/csscomplete.vim'
+Plugin '1995eaton/vim-better-javascript-completion'
+Plugin 'pangloss/vim-javascript'
+Plugin 'ap/vim-css-color'
+Plugin 'mustache/vim-mustache-handlebars'
+Plugin 'elzr/vim-json'
+Plugin 'pocke/vueim'
+
+" GIT
+Plugin 'airblade/vim-gitgutter'
+Plugin 'tpope/vim-fugitive'
+
+" Edit
+Plugin 'godlygeek/tabular'
+Plugin 'majutsushi/tagbar'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-surround'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'tommcdo/vim-exchange'
+Plugin 'mbbill/undotree'
+Plugin 'Raimondi/delimitMate'
+Plugin 'tpope/vim-repeat'
+Plugin 'matze/vim-move'
+Plugin 'kien/rainbow_parentheses.vim'
+Plugin 'tomtom/tcomment_vim'
+Plugin 'joonty/vdebug'
+Plugin 'dhruvasagar/vim-table-mode'
+Plugin 'vim-scripts/matchit.zip'
+
+" Misc
+Plugin 'scrooloose/syntastic'
+Plugin 'bling/vim-airline'
+Plugin 'mhinz/vim-startify'
+Plugin 'Shougo/vimshell.vim'
+Plugin 'embear/vim-localvimrc'
+Plugin 'mattn/webapi-vim'
+
+Bundle 'altercation/vim-colors-solarized'
