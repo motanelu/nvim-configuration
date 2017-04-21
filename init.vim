@@ -80,8 +80,9 @@ colorscheme solarized
     " Detect file types
     autocmd BufRead,BufNewFile *httpd*.conf setfiletype apache "Apache config files
     autocmd BufRead,BufNewFile .htaccess    setfiletype apache "htaccess files
-    autocmd BufRead,BufNewFile *inc         setfiletype php "PHP include files
     autocmd BufRead,BufNewFile *handlebars  setfiletype html "handlebars templates
+    autocmd BufRead,BufNewFile *.vue        setfiletype vue.html.javascript.css
+    autocmd FileType vue syntax sync fromstart
 
     " better autochdir
     autocmd BufEnter * silent! lcd %:p:h
@@ -92,6 +93,7 @@ colorscheme solarized
     autocmd FileType css        set omnifunc=csscomplete#CompleteCSS noci
     autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
     autocmd FileType crontab    setlocal nobackup nowritebackup
+
 
     " StriTrailingWhitespace - taken from http://spf13.com
     function! StripTrailingWhitespace()
@@ -271,6 +273,8 @@ colorscheme solarized
 " {{{ Javascript / HTML configuration
     au FileType javascript setl sw=2 sts=2 et
     au FileType html setl sw=2 sts=2 et
+    au FileType css setl sw=2 sts=2 et
+    au FileType vue setl sw=2 sts=2 et
 
     " {{{ 1995eaton/vim-better-javascript-completion
         let g:vimjs#smartcomplete = 1
@@ -283,7 +287,12 @@ colorscheme solarized
         \ 'jspc#omni'
     \]
     let g:deoplete#sources = {}
-    let g:deoplete#sources['javascript.jsx'] = ['file', 'ultisnips', 'ternjs']
+    let g:deoplete#sources['javascript.jsx.vue'] = ['file', 'ultisnips', 'ternjs']
+    let g:tern#filetypes = [
+        \ 'jsx',
+        \ 'javascript.jsx',
+        \ 'vue'
+    \]
     let g:tern#command = ['tern']
     let g:tern#arguments = ['--persistent']
 " }}}
