@@ -1,28 +1,10 @@
-"
-" Custom init.vim file
-"
-" This is in the public domain, so feel free to use / change / redistribute it
-" You can check the complete repository at http://github.com/motanelu/vim-configuration
-"
-" Author: Tudor Barbu <hello@tudorbarbu.ninja>
-" Blog: http://tudorbarbu.ninja
-" License: LGPL
-""
-
-" {{{ Vundle config
-    set nocompatible
-    filetype off
-    set rtp+=~/.config/nvim/bundle/Vundle.vim
-    call vundle#begin()
-    Plugin 'gmarik/Vundle.vim'
-
-    source ~/.config/nvim/vundle.nvim
-
-    call vundle#end()
-    filetype plugin indent on
-" }}}
+call plug#begin('~/.vim/plugged')
+  source ~/.config/nvim/vimplug.vim
+call plug#end()
 
 syntax on
+autocmd ColorScheme janah highlight Normal ctermbg=235
+colorscheme janah
 
 " Generic config
 set backspace=indent,eol,start  " Backspace for dummies
@@ -49,9 +31,9 @@ set completeopt-=preview        " auto complete menu
 set title                       " show window title
 set autoindent                  " autoindent when pressing Enter
 set background=dark             " use a dark scheme
-set tabstop=4                   " use 4 spaces for tabs
-set shiftwidth=4
-set softtabstop=4
+set tabstop=2                   " use 4 spaces for tabs
+set shiftwidth=2
+set softtabstop=2
 set expandtab
 set incsearch
 set ignorecase
@@ -69,48 +51,24 @@ set cursorline                  " highlight the current line
 set fileformat=unix             " unix file format by default
 set fileformats=unix,dos,mac    " available formats
 set listchars=tab:›\ ,trail:•,extends:#,nbsp:. " Highlight problematic whitespace
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
+set autoread                    " auto reload changed files
 
-" color scheme
-colorscheme solarized
+" StriTrailingWhitespace - taken from http://spf13.com
+function! StripTrailingWhitespace()
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " do the business:
+    %s/\s\+$//e
+    " clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
 
-" {{{ File configuration
-    " Detect file types
-    autocmd BufRead,BufNewFile *httpd*.conf setfiletype apache "Apache config files
-    autocmd BufRead,BufNewFile .htaccess    setfiletype apache "htaccess files
-    autocmd BufRead,BufNewFile *handlebars  setfiletype html "handlebars templates
-    autocmd BufRead,BufNewFile *.vue        setfiletype vue.html.javascript.css
-    autocmd FileType vue syntax sync fromstart
-
-    " better autochdir
-    autocmd BufEnter * silent! lcd %:p:h
-
-    autocmd FileType python     set omnifunc=pythoncomplete#Complete
-    autocmd FileType javascript set omnifunc=javascriptcomplete#CompleteJS
-    autocmd FileType html       set omnifunc=htmlcomplete#CompleteTags
-    autocmd FileType css        set omnifunc=csscomplete#CompleteCSS noci
-    autocmd FileType xml        set omnifunc=xmlcomplete#CompleteTags
-    autocmd FileType crontab    setlocal nobackup nowritebackup
-
-
-    " StriTrailingWhitespace - taken from http://spf13.com
-    function! StripTrailingWhitespace()
-        " Preparation: save last search, and cursor position.
-        let _s=@/
-        let l = line(".")
-        let c = col(".")
-        " do the business:
-        %s/\s\+$//e
-        " clean up: restore previous search history, and cursor position
-        let @/=_s
-        call cursor(l, c)
-    endfunction
-
-    " Remove whitespace on write
-    autocmd BufWritePre * call StripTrailingWhitespace()
-" }}}
+" Remove whitespace on write
+autocmd BufWritePre * call StripTrailingWhitespace()
 
 " {{{ Utility mappings
     " Avoid typos
@@ -136,20 +94,8 @@ colorscheme solarized
     " Remap the leader to something more comfortable
     let mapleader=","
 
-    nmap <leader>t :TagbarToggle<CR>     " toggle tagbar - Plugin: majutsushi/tagbar
-    nmap <leader>r :UndotreeToggle<cr>   " toggle undotree - Plugin: mbbill/undotree
-
-    " select last pasted text
+    " select previously pasted text
     nnoremap <expr> gp '`[' . strpart(getregtype(), 0, 1) . '`]'
-
-    " spellcheck toggle (on/off)
-    nmap <silent> <leader>s :set spell!<CR>
-
-    " CTRL + hjkl to move between windows
-    nnoremap <C-J> <C-W><C-J>
-    nnoremap <C-K> <C-W><C-K>
-    nnoremap <C-L> <C-W><C-L>
-    nnoremap <C-H> <C-W><C-H>
 
     " using tabs
     noremap tn :tabnew<cr>      " tn to open a new tab
@@ -158,182 +104,51 @@ colorscheme solarized
     noremap ˙ :tabprevious<cr>  " ALT + h previous tab
     noremap to :tabonly<cr>     " close all other tabs
 
-    inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
-
     " go back after a gf
     noremap gb <C-o>
 " }}}
-
+"
 " {{{ Plugin configurations
-    " {{{ ctrlpvim/ctrlp.vim
-        let g:ctrlp_working_path_mode = 'ra'
-        set wildignore+=*/tmp/*,*.so,*.swp,*.zip     " MacOSX/Linux
-        let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
-    " }}}
+  " ctrlpvim/ctrlp.vim
+  let g:ctrlp_working_path_mode = 'ra'
+  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
 
-    " {{{ tacahiroy/ctrlp-funky
-        let g:ctrlp_extensions = ['funky']
-        nnoremap <Leader>fu :CtrlPFunky<Cr>
-        nnoremap <Leader>fU :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
-    " }}}
+  " dhruvasagar/vim-table-mode
+  let g:table_mode_corner_corner   = "+"
+  let g:table_mode_header_fillchar = "="
 
-    " {{{ kien/rainbow_parentheses.vim
-        let g:rbpt_colorpairs = [
-            \ ['blue',         '#FF6000'],
-            \ ['cyan',         '#00FFFF'],
-            \ ['darkmagenta',  '#CC00FF'],
-            \ ['yellow',       '#FFFF00'],
-            \ ['red',          '#FF0000'],
-            \ ['darkgreen',    '#00FF00'],
-            \ ['White',        '#c0c0c0'],
-            \ ['blue',         '#FF6000'],
-            \ ['cyan',         '#00FFFF'],
-            \ ['darkmagenta',  '#CC00FF'],
-            \ ['yellow',       '#FFFF00'],
-            \ ['red',          '#FF0000'],
-            \ ['darkgreen',    '#00FF00'],
-            \ ['White',        '#c0c0c0'],
-            \ ['blue',         '#FF6000'],
-            \ ['cyan',         '#00FFFF'],
-            \ ['darkmagenta',  '#CC00FF'],
-            \ ['yellow',       '#FFFF00'],
-            \ ['red',          '#FF0000'],
-            \ ['darkgreen',    '#00FF00'],
-            \ ['White',        '#c0c0c0'],
-        \ ]
-        au VimEnter * RainbowParenthesesToggle
-        au Syntax * RainbowParenthesesLoadRound
-        au Syntax * RainbowParenthesesLoadSquare
-        au Syntax * RainbowParenthesesLoadBraces
-    " }}}
+  " Lokaltog/vim-easymotion
+  hi link EasyMotionTarget ErrorMsg
+  hi link EasyMotionShade  Comment
 
-    " {{{ godlygeek/tabular
-        nmap <Leader>a=  :Tabularize /=<CR>
-        vmap <Leader>a=  :Tabularize /=<CR>
-        nmap <Leader>a=> :Tabularize /=><CR>
-        vmap <Leader>a=> :Tabularize /=><CR>
-        nmap <Leader>a:  :Tabularize /:<CR>
-        vmap <Leader>a:  :Tabularize /:<CR>
-        nmap <Leader>a:: :Tabularize /:\zs<CR>
-        vmap <Leader>a:: :Tabularize /:\zs<CR>
-    " }}}
+  " matze/vim-move
+  let g:move_key_modifier = 'C'
 
-    " {{{ SirVer/ultisnips
-        let g:UltiSnipsExpandTrigger       = "<C-l>"
-        let g:UltiSnipsJumpForwardTrigger  = "<C-l>"
-        let g:UltiSnipsJumpBackwardTrigger = "<C-z>"
-        let g:UltiSnipsEditSplit           = "vertical"
-    " }}}
+  " Shougo/deoplete.nvim
+  let g:deoplete#enable_at_startup = 1
 
-    " {{{ joonty/vdebug
-        let g:vdebug_keymap = {
-            \    "run"            : "<Leader>'",
-            \    "run_to_cursor"  : "<Leader><Down>",
-            \    "step_over"      : "<Leader><Up>",
-            \    "step_into"      : "<Leader><Left>",
-            \    "step_out"       : "<Leader><Right>",
-            \    "close"          : "q",
-            \    "detach"         : "x",
-            \    "eval_visual"    : "<Leader>e",
-            \    "sspellchcket_breakpoint" : "<Leader>p"
-        \}
+  " posva/vim-vue
+  autocmd BufEnter *.vue :syntax sync fromstart
+  autocmd BufRead,BufNewFile *.vue setlocal filetype=vue.html.javascript.css
 
-        let g:vdebug_options = {
-            \    "break_on_open" : 0,
-        \}
-    " }}}
+  " moll/vim-node
+  nmap gF <Plug>NodeVSplitGotoFile
 
-    " {{{ dhruvasagar/vim-table-mode
-        let g:table_mode_corner_corner   = "+"
-        let g:table_mode_header_fillchar = "="
-    " }}}
+  " vim-airline/vim-airline
+  let g:airline#extensions#tabline#enabled = 1
+  let g:airline_powerline_fonts = 1
 
-    " {{{ scrooloose/syntastic
-        let g:syntastic_always_populate_loc_list = 1
-        let g:syntastic_auto_loc_list            = 0
-        let g:syntastic_check_on_wq              = 1
-        let g:syntastic_check_on_open            = 1
-        let g:syntastic_javascript_checkers      = ['standard']
-    " }}}
+  " scrooloose/nerdtree
+  nmap <C-b> :NERDTreeToggle<CR>
 
-    " {{{ ternjs/tern_for_vim
-        let g:tern_show_argument_hints='on_hold'
-        let g:tern_map_keys = 1
-    " }}}
+  "
+  let g:vimjs#smartcomplete = 1
 
-    " {{{ Lokaltog/vim-easymotion
-        hi link EasyMotionTarget ErrorMsg
-        hi link EasyMotionShade  Comment
-    " }}}
-
-    let g:airline_powerline_fonts = 1   " bling/vim-airline
-    let g:move_key_modifier = 'C'       " matze/vim-move
+  let g:airline#extensions#tabline#show_buffers = 0
+  let g:airline#extensions#tabline#show_splits = 0
+  let g:airline#extensions#tabline#show_tabs = 1
+  let g:airline#extensions#tabline#show_tab_nr = 0
+  let g:airline#extensions#tabline#show_tab_type = 0
+  let g:airline#extensions#tabline#show_close_button = 0
 " }}}
-
-" {{{ Javascript / HTML configuration
-    au FileType javascript setl sw=2 sts=2 et
-    au FileType html setl sw=2 sts=2 et
-    au FileType css setl sw=2 sts=2 et
-    au FileType vue setl sw=2 sts=2 et
-
-    " {{{ 1995eaton/vim-better-javascript-completion
-        let g:vimjs#smartcomplete = 1
-    " }}}
-
-    let g:deoplete#enable_at_startup = 1
-    let g:deoplete#omni#functions = {}
-    let g:deoplete#omni#functions.javascript = [
-        \ 'tern#Complete',
-        \ 'jspc#omni'
-    \]
-    let g:deoplete#sources = {}
-    let g:deoplete#sources['javascript.jsx.vue'] = ['file', 'ultisnips', 'ternjs']
-    let g:tern#filetypes = [
-        \ 'jsx',
-        \ 'javascript.jsx',
-        \ 'vue'
-    \]
-    let g:tern#command = ['tern']
-    let g:tern#arguments = ['--persistent']
-" }}}
-
-" {{{ PHP Configuration
-    " PHP specials (next/previous variable)
-    noremap L f$
-    noremap H F$
-
-    " PHP complete
-    let g:phpcomplete_parse_docblock_comments = 1
-    let g:phpcomplete_index_composer_command = '/usr/local/bin/composer'
-
-    " php documentor
-    inoremap <C-o> <ESC>:call PhpDocSingle()<CR>i
-    nnoremap <C-o> :call PhpDocSingle()<CR>
-    vnoremap <C-o> :call PhpDocRange()<CR>
-
-    " configure tagbar to not show variables
-    let g:tagbar_type_php  = {
-        \ 'ctagstype' : 'php',
-        \ 'kinds'     : [
-            \ 'n:namespaces',
-            \ 'i:interfaces',
-            \ 'c:classes',
-            \ 'd:constant definitions',
-            \ 'f:functions'
-        \ ]
-    \ }
-
-    let g:syntastic_php_checkers   = ['php', 'phpcs']        " do not run phpmd
-    let g:syntastic_php_phpcs_args = '-s -n --standard=PSR2' " always check against PSR2
-
-    " php code fixer
-    let g:php_cs_fixer_level    = "symfony"  " which level ?
-    let g:php_cs_fixer_config   = "default"  " configuration
-    let g:php_cs_fixer_php_path = "php"      " Path to PHP
-    let g:php_cs_fixer_verbose  = 1          " Return the output of
-    let g:php_cs_fixer_enable_default_mapping = 1       " <leader>pcf
-
-    autocmd FileType php set omnifunc=phpcomplete#CompletePHP
-" }}}
-
 
