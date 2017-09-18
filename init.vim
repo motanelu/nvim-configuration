@@ -3,8 +3,10 @@ call plug#begin('~/.vim/plugged')
 call plug#end()
 
 syntax on
-autocmd ColorScheme janah highlight Normal ctermbg=235
-colorscheme janah
+if (has("termguicolors"))
+ set termguicolors
+endif
+colorscheme OceanicNext
 
 " Generic config
 set backspace=indent,eol,start  " Backspace for dummies
@@ -66,6 +68,15 @@ function! StripTrailingWhitespace()
     let @/=_s
     call cursor(l, c)
 endfunction
+
+augroup omnifuncs
+  autocmd!
+  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+augroup end
 
 " Remove whitespace on write
 autocmd BufWritePre * call StripTrailingWhitespace()
@@ -137,18 +148,29 @@ autocmd BufWritePre * call StripTrailingWhitespace()
   " vim-airline/vim-airline
   let g:airline#extensions#tabline#enabled = 1
   let g:airline_powerline_fonts = 1
-
-  " scrooloose/nerdtree
-  nmap <C-b> :NERDTreeToggle<CR>
-
-  "
-  let g:vimjs#smartcomplete = 1
-
   let g:airline#extensions#tabline#show_buffers = 0
   let g:airline#extensions#tabline#show_splits = 0
   let g:airline#extensions#tabline#show_tabs = 1
   let g:airline#extensions#tabline#show_tab_nr = 0
   let g:airline#extensions#tabline#show_tab_type = 0
   let g:airline#extensions#tabline#show_close_button = 0
+  let g:airline_theme='oceanicnext'
+
+  " scrooloose/nerdtree
+  nmap <C-b> :NERDTreeToggle<CR>
+
+  " Shougo/deoplete.nvim
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#omni#functions = {}
+  let g:deoplete#omni#functions.javascript = ['tern#Complete']
+  let g:deoplete#sources = {}
+  let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs']
+  let g:deoplete#sources#ternjs#docs = 1
+  let g:deoplete#sources#ternjs#types = 1
+
+  " ternjs/tern_for_vim
+  let g:tern#command = ['tern']
+  let g:tern_show_signature_in_pum = 1
+  let g:tern#arguments = ['--persistent']
 " }}}
 

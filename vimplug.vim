@@ -1,5 +1,7 @@
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
+Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 
 " File navigation
 Plug 'scrooloose/nerdtree'
@@ -16,8 +18,8 @@ Plug 'vim-airline/vim-airline'
 Plug 'posva/vim-vue'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
-Plug '1995eaton/vim-better-javascript-completion'
 Plug 'moll/vim-node'
+Plug 'othree/yajs.vim'
 
 " Edit
 Plug 'Lokaltog/vim-easymotion'
@@ -33,4 +35,4 @@ Plug 'kshenoy/vim-signature'
 Plug 'cyansprite/Extract'
 
 " Colorscheme
-Plug 'mhinz/vim-janah'
+Plug 'mhartington/oceanic-next'
