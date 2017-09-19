@@ -11,15 +11,11 @@ Plug 'tyok/nerdtree-ack'
 Plug 'xuyuanp/nerdtree-git-plugin'
 Plug 'ctrlpvim/ctrlp.vim'
 
-" Statusline
-Plug 'vim-airline/vim-airline'
-
 " Javascript / Json
 Plug 'posva/vim-vue'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
-Plug 'othree/yajs.vim'
 
 " Edit
 Plug 'Lokaltog/vim-easymotion'
@@ -33,6 +29,10 @@ Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-surround'
 Plug 'kshenoy/vim-signature'
 Plug 'cyansprite/Extract'
+
+" Utility
+Plug 'tpope/vim-fugitive'
+Plug 'vim-airline/vim-airline'
 
 " Colorscheme
 Plug 'mhartington/oceanic-next'
