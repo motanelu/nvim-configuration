@@ -81,6 +81,11 @@ augroup end
 " Remove whitespace on write
 autocmd BufWritePre * call StripTrailingWhitespace()
 
+tnoremap <C-w>h <C-\><C-n><C-w>h
+tnoremap <C-w>j <C-\><C-n><C-w>j
+tnoremap <C-w>k <C-\><C-n><C-w>k
+tnoremap <C-w>l <C-\><C-n><C-w>l
+
 " {{{ Utility mappings
     " Avoid typos
     noremap :W :w
@@ -122,7 +127,7 @@ autocmd BufWritePre * call StripTrailingWhitespace()
 " {{{ Plugin configurations
   " ctrlpvim/ctrlp.vim
   let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git'
+  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|coverage'
 
   " dhruvasagar/vim-table-mode
   let g:table_mode_corner_corner   = "+"
