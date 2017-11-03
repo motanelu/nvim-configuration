@@ -33,6 +33,8 @@ Plug 'cyansprite/Extract'
 " Utility
 Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'lambdalisue/vim-unified-diff'
 
 " Colorscheme
 Plug 'mhartington/oceanic-next'
