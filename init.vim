@@ -86,6 +86,9 @@ tnoremap <C-w>j <C-\><C-n><C-w>j
 tnoremap <C-w>k <C-\><C-n><C-w>k
 tnoremap <C-w>l <C-\><C-n><C-w>l
 
+let g:python_host_prog = '/Users/tudor/.pyenv/versions/neovim2/bin/python'
+let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
+
 " {{{ Utility mappings
     " Avoid typos
     noremap :W :w
@@ -185,4 +188,5 @@ tnoremap <C-w>l <C-\><C-n><C-w>l
   let g:tern_show_signature_in_pum = 1
   let g:tern#arguments = ['--persistent']
 " }}}
+
 

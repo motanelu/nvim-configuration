@@ -1,7 +1,8 @@
 " Autocomplete
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
+Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
 " File navigation
 Plug 'scrooloose/nerdtree'
@@ -35,6 +36,8 @@ Plug 'tpope/vim-fugitive'
 Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'lambdalisue/vim-unified-diff'
+Plug 'baverman/vial'
+Plug 'baverman/vial-http'
 
 " Colorscheme
 Plug 'mhartington/oceanic-next'
