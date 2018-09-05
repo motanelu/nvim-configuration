@@ -143,12 +143,6 @@ let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
   " matze/vim-move
   let g:move_key_modifier = 'C'
 
-  " Shougo/deoplete.nvim
-  let g:deoplete#enable_at_startup = 1
-  function! Multiple_cursors_before()
-      let b:deoplete_disable_auto_complete = 1
-  endfunction
-
   function! Multiple_cursors_after()
       let b:deoplete_disable_auto_complete = 0
   endfunction
@@ -173,15 +167,6 @@ let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
 
   " scrooloose/nerdtree
   nmap <C-b> :NERDTreeToggle<CR>
-
-  " Shougo/deoplete.nvim
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#omni#functions = {}
-  let g:deoplete#omni#functions.javascript = ['tern#Complete']
-  let g:deoplete#sources = {}
-  let g:deoplete#sources['javascript.jsx'] = ['file', 'ternjs']
-  let g:deoplete#sources#ternjs#docs = 1
-  let g:deoplete#sources#ternjs#types = 1
 
   " ternjs/tern_for_vim
   let g:tern#command = ['tern']

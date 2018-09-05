@@ -1,7 +1,5 @@
 " Autocomplete
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
-" Plug 'carlitux/deoplete-ternjs', { 'for': ['javascript', 'javascript.jsx'] }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py --tern-completer' }
 
 " File navigation
