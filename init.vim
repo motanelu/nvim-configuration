@@ -87,7 +87,7 @@ tnoremap <C-w>k <C-\><C-n><C-w>k
 tnoremap <C-w>l <C-\><C-n><C-w>l
 
 let g:python_host_prog = '/Users/tudor/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/tudor/.pyenv/versions/3.4.4/bin/python'
+let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
 
 " {{{ Utility mappings
     " Avoid typos
