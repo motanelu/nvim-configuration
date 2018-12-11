@@ -12,15 +12,16 @@ Plug 'ctrlpvim/ctrlp.vim'
 
 " Javascript / Json
 Plug 'posva/vim-vue'
+Plug 'vim-syntastic/syntastic'
+Plug 'sekel/vim-vue-syntastic'
 Plug 'elzr/vim-json'
-"Plug 'pangloss/vim-javascript'
+Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
 Plug 'leafgarland/typescript-vim'
 
 " Edit
 Plug 'Lokaltog/vim-easymotion'
 Plug 'terryma/vim-multiple-cursors'
-" Plug 'w0rp/ale'
 Plug 'matze/vim-move'
 Plug 'vim-scripts/matchit.zip'
 Plug 'dhruvasagar/vim-table-mode'
