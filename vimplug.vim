@@ -1,5 +1,4 @@
 " Autocomplete
-Plug 'ternjs/tern_for_vim', { 'do': 'npm install' }
 Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 
 " File navigation
@@ -34,6 +33,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'airblade/vim-gitgutter'
 Plug 'baverman/vial'
 Plug 'baverman/vial-http'
+Plug 'tpope/vim-fugitive'
 
 " Colorscheme
 Plug 'mhartington/oceanic-next'

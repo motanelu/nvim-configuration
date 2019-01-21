@@ -6,6 +6,9 @@ syntax on
 if (has("termguicolors"))
  set termguicolors
 endif
+
+let g:oceanic_next_terminal_bold = 1
+let g:oceanic_next_terminal_italic = 1
 colorscheme OceanicNext
 
 " Generic config
@@ -29,7 +32,7 @@ set nobackup                    " no backup - use git like a normal person
 set noswapfile                  " no swap file
 set splitbelow                  " horizontal windows always split below
 set splitright                  " vertical windows always split right
-set completeopt-=preview        " auto complete menu
+set completeopt-=preview
 set title                       " show window title
 set autoindent                  " autoindent when pressing Enter
 set background=dark             " use a dark scheme
@@ -68,15 +71,6 @@ function! StripTrailingWhitespace()
     let @/=_s
     call cursor(l, c)
 endfunction
-
-augroup omnifuncs
-  autocmd!
-  autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-  autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-  autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-  autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-  autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-augroup end
 
 " Remove whitespace on write
 autocmd BufWritePre * call StripTrailingWhitespace()
@@ -130,7 +124,7 @@ let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
 " {{{ Plugin configurations
   " ctrlpvim/ctrlp.vim
   let g:ctrlp_working_path_mode = 'ra'
-  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git|coverage'
+  let g:ctrlp_custom_ignore = 'node_modules\|DS_Store\|git\|coverage\|dist'
 
   " dhruvasagar/vim-table-mode
   let g:table_mode_corner_corner   = "+"
@@ -143,35 +137,24 @@ let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
   " matze/vim-move
   let g:move_key_modifier = 'C'
 
-  function! Multiple_cursors_after()
-      let b:deoplete_disable_auto_complete = 0
-  endfunction
-
-  " posva/vim-vue
-  autocmd BufEnter *.vue :syntax sync fromstart
-  autocmd BufRead,BufNewFile *.vue setlocal filetype=html
-
   " moll/vim-node
   nmap gF <Plug>NodeVSplitGotoFile
 
   " vim-airline/vim-airline
   let g:airline#extensions#tabline#enabled = 1
   let g:airline_powerline_fonts = 1
+  let g:airline#extensions#tabline#formatter = "unique_tail_improved"
   let g:airline#extensions#tabline#show_buffers = 0
   let g:airline#extensions#tabline#show_splits = 0
   let g:airline#extensions#tabline#show_tabs = 1
   let g:airline#extensions#tabline#show_tab_nr = 0
   let g:airline#extensions#tabline#show_tab_type = 0
   let g:airline#extensions#tabline#show_close_button = 0
+  let g:airline#extensions#ale#enabled = 1
   let g:airline_theme='oceanicnext'
 
   " scrooloose/nerdtree
   nmap <C-b> :NERDTreeToggle<CR>
 
-  " ternjs/tern_for_vim
-  let g:tern#command = ['tern']
-  let g:tern_show_signature_in_pum = 1
-  let g:tern#arguments = ['--persistent']
+  let g:javascript_plugin_jsdoc = 1
 " }}}
-
-
