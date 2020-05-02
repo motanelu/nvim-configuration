@@ -1,5 +1,6 @@
 " Autocomplete
-Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
 
 " File navigation
 Plug 'scrooloose/nerdtree'
@@ -16,7 +17,8 @@ Plug 'sekel/vim-vue-syntastic'
 Plug 'elzr/vim-json'
 Plug 'pangloss/vim-javascript'
 Plug 'moll/vim-node'
-Plug 'leafgarland/typescript-vim'
+Plug 'HerringtonDarkholme/yats.vim'
+Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 
 " Edit
 Plug 'Lokaltog/vim-easymotion'

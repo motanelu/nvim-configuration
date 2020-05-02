@@ -80,8 +80,8 @@ tnoremap <C-w>j <C-\><C-n><C-w>j
 tnoremap <C-w>k <C-\><C-n><C-w>k
 tnoremap <C-w>l <C-\><C-n><C-w>l
 
-let g:python_host_prog = '/Users/tudor/.pyenv/versions/neovim2/bin/python'
-let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
+let g:python3_host_prog = '~/.pyenv/versions/neovim3/bin/python'
+let g:python_host_prog  = '~/.pyenv/versions/neovim2/bin/python'
 
 " {{{ Utility mappings
     " Avoid typos
@@ -152,6 +152,12 @@ let g:python3_host_prog = '/Users/tudor/.pyenv/versions/neovim3/bin/python'
   let g:airline#extensions#tabline#show_close_button = 0
   let g:airline#extensions#ale#enabled = 1
   let g:airline_theme='oceanicnext'
+
+  let g:deoplete#enable_at_startup = 1
+  call deoplete#custom#source('tabnine', 'rank', 50)
+
+  inoremap <expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+  inoremap <expr> <S-TAB> pumvisible() ? "\<C-p>" : "\<TAB>"
 
   " scrooloose/nerdtree
   nmap <C-b> :NERDTreeToggle<CR>
